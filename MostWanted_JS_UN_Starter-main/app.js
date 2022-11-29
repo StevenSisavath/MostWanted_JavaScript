@@ -44,18 +44,6 @@ function app(people) {
 }
 // End of app()
 
-
-function searchByName(people){
-    let firstName = promptFor("What is the person's first name?", chars);
-    let lastName = promptFor("What is the person's last name?", chars);
-
-    let foundPerson = people.filter(function (person) {
-        if (person.firstName === firstName && person.lastName === lastName) {
-            return true;
-        }
-    });
-}
-
 function searchByTraits(people){
     let trait = promptFor("Please type in search criteria with space then value? \nCriterias: \nid \nfirstName\nlastName\ngender\ndob\nheight\nweight\neyeColor\noccupation\nparents\ncurrentSpouse", chars);
     // let lastName = promptFor("What is the person's last name?", chars);
@@ -64,7 +52,8 @@ function searchByTraits(people){
         if (('id ' + person.id === trait) || ('firstName ' + person.firstName === trait) || ('lastName ' + person.lastName === trait) || ('gender ' + person.gender === trait) || ('dob ' + person.dob === trait) || ('height ' + person.height === trait) || ('weight ' + person.weight === trait) || ('eyeColor ' + person.eyeColor === trait) || ('occupation ' + person.occupation === trait) || ('parents ' + person.parents === trait) || ('currentSpouse ' + person.currentSpouse === trait)){
             return true;
         }
-        })
+        })        
+        displayPeople(foundPeople)
     return foundPeople
 }
 
@@ -138,9 +127,13 @@ function findPersonFamily(person, people){
         }
     function findparents(){
         let parents = people.filter(function(el){
-            if (person.parents.includes(409574486)){
-                    
-            }})
+            if (person.parents.includes(el.id)){
+                return true 
+            }
+            else{
+                return false
+            }   
+            })
         return parents
         }
     function findSibling(){
@@ -154,8 +147,8 @@ function findPersonFamily(person, people){
         return siblings
         }
     let spouse = console.log(findspouse())
-    let parents = console.log(findparents)
-    let siblings = console.log(findSibling)
+    let parents = console.log(findparents())
+    let siblings = console.log(findSibling())
 }
 /**
  * This function is used when searching the people collection by
