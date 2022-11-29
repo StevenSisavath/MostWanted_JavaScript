@@ -125,7 +125,38 @@ function mainMenu(person, people) {
     }
 }
 // End of mainMenu()
-
+function findPersonFamily(person, people){
+    function findspouse(){
+        let spouse = people.filter(function(el){
+            if (el.id == person.currentSpouse ){
+                return true
+            }
+            else{
+                return false;        
+            }})
+        return spouse
+        }
+    function findparents(){
+        let parents = people.filter(function(el){
+            if (person.parents.includes(409574486)){
+                    
+            }})
+        return parents
+        }
+    function findSibling(){
+        let siblings = people.filter(function(el){
+            if (person.parents == el.parents){
+                return true
+            }
+            else{
+                return false;        
+            }})
+        return siblings
+        }
+    let spouse = console.log(findspouse())
+    let parents = console.log(findparents)
+    let siblings = console.log(findSibling)
+}
 /**
  * This function is used when searching the people collection by
  * a person-object's firstName and lastName properties.
@@ -153,10 +184,11 @@ function searchByName(people) {
  * @param {Array} people        A collection of person objects.
  */
 function displayPeople(people) {
+    
     alert(
         people
             .map(function (person) {
-                return `${person.firstName} ${person.lastName}`;
+                return `${person.firstName} ${person.lastName}` ;
             })
             .join("\n")
     );
