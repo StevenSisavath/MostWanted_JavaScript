@@ -32,6 +32,7 @@ function app(people) {
             //! TODO #4: Declare a searchByTraits (multiple traits) function //////////////////////////////////////////
                 //! TODO #4a: Provide option to search for single or multiple //////////////////////////////////////////
             searchResults = searchByTraits(people);
+            console.log(searchByTraits(people))
             break;
         default:
             // Re-initializes the app() if neither case was hit above. This is an instance of recursion.
@@ -53,19 +54,20 @@ function searchByName(people){
             return true;
         }
     });
-    return foundPerson;
 }
+
 function searchByTraits(people){
-    let promptForTraitSearch = promptFor("Please type in search criteria without spaces then value? \nCriterias: \nid \nfirstName\nlastName\ngender\ndob\nheight\nweight\neyeColor\noccupation\nparents\ncurrentSpouse", chars);
+    let trait = promptFor("Please type in search criteria with space then value? \nCriterias: \nid \nfirstName\nlastName\ngender\ndob\nheight\nweight\neyeColor\noccupation\nparents\ncurrentSpouse", chars);
     // let lastName = promptFor("What is the person's last name?", chars);
 
-    // let foundPerson = people.filter(function (person) {
-    //     if (person.firstName === firstName && person.lastName === lastName) {
-    //         return true;
-    //     }
-    // });
-    // return foundPerson;
+    let foundPeople = people.filter(function(person){
+        if (('id ' + person.id === trait) || ('firstName ' + person.firstName === trait) || ('lastName ' + person.lastName === trait) || ('gender ' + person.gender === trait) || ('dob ' + person.dob === trait) || ('height ' + person.height === trait) || ('weight ' + person.weight === trait) || ('eyeColor ' + person.eyeColor === trait) || ('occupation ' + person.occupation === trait) || ('parents ' + person.parents === trait) || ('currentSpouse ' + person.currentSpouse === trait)){
+            return true;
+        }
+        })
+    return foundPeople
 }
+
 
 
 
