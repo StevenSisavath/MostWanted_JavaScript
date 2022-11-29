@@ -43,6 +43,35 @@ function app(people) {
 }
 // End of app()
 
+
+function searchByName(people){
+    let firstName = promptFor("What is the person's first name?", chars);
+    let lastName = promptFor("What is the person's last name?", chars);
+
+    let foundPerson = people.filter(function (person) {
+        if (person.firstName === firstName && person.lastName === lastName) {
+            return true;
+        }
+    });
+    return foundPerson;
+}
+function searchByTraits(people){
+    let promptForTraitSearch = promptFor("Please type in search criteria without spaces then value? \nCriterias: \nid \nfirstName\nlastName\ngender\ndob\nheight\nweight\neyeColor\noccupation\nparents\ncurrentSpouse", chars);
+    // let lastName = promptFor("What is the person's last name?", chars);
+
+    // let foundPerson = people.filter(function (person) {
+    //     if (person.firstName === firstName && person.lastName === lastName) {
+    //         return true;
+    //     }
+    // });
+    // return foundPerson;
+}
+
+
+
+
+
+
 /**
  * After finding a single person, we pass in the entire person-object that we found,
  * as well as the entire original dataset of people. We need people in order to find
