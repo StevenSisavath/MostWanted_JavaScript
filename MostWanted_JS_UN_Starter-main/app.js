@@ -46,16 +46,31 @@ function app(people) {
 
 function searchByTraits(people){
     let trait = promptFor("Please type in search criteria with space then value? \nCriterias: \nid \nfirstName\nlastName\ngender\ndob\nheight\nweight\neyeColor\noccupation\nparents\ncurrentSpouse", chars);
-    // let lastName = promptFor("What is the person's last name?", chars);
-
+    let char = ';'
+    let numberOfCriterias = countString(trait, char)
+    let myArray = trait.split(';',numberOfCriterias + 1)
     let foundPeople = people.filter(function(person){
         if (('id ' + person.id === trait) || ('firstName ' + person.firstName === trait) || ('lastName ' + person.lastName === trait) || ('gender ' + person.gender === trait) || ('dob ' + person.dob === trait) || ('height ' + person.height === trait) || ('weight ' + person.weight === trait) || ('eyeColor ' + person.eyeColor === trait) || ('occupation ' + person.occupation === trait) || ('parents ' + person.parents === trait) || ('currentSpouse ' + person.currentSpouse === trait)){
             return true;
-        }
-        })        
-        displayPeople(foundPeople)
-    return foundPeople
+        }})  
+
+    displayPeople(foundPeople)
+    return searchByTraits(foundPeople)
 }
+function countString(str, letter) {
+    let count = 0;
+
+    // looping through the items
+    for (let i = 0; i < str.length; i++) {
+
+        // check if the character is at that position
+        if (str.charAt(i) == letter) {
+            count += 1;
+        }
+    }
+    return count;
+}
+
 
 /**
  * After finding a single person, we pass in the entire person-object that we found,
@@ -87,13 +102,11 @@ function mainMenu(person, people) {
             //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
             // HINT: Look for a people-collection stringifier utility function to help
             let personFamily = findPersonFamily(person[0], people);
-            alert(personFamily);
             break;
         case "descendants":
             //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
             // HINT: Review recursion lecture + demo for bonus user story
             let personDescendants = findPersonDescendants(person[0], people);
-            alert(personDescendants);
             break;
         case "restart":
             // Restart app() from the very beginning
@@ -108,8 +121,9 @@ function mainMenu(person, people) {
     }
 }
 // End of mainMenu()
+
 function findPersonFamily(person, people){
-    function findspouse(){
+    function findSpouse(){
         let spouse = people.filter(function(el){
             if (el.id == person.currentSpouse ){
                 return true
@@ -117,7 +131,6 @@ function findPersonFamily(person, people){
             else{
                 return false;        
             }})
-            displayPeople(spouse)
         return spouse
         }
     function findparents(){
@@ -128,7 +141,6 @@ function findPersonFamily(person, people){
             else{
                 return false
             }})
-            displayPeople(parents)
         return parents
         }
     function findSibling(){
@@ -139,12 +151,11 @@ function findPersonFamily(person, people){
             else{
                 return false;        
             }})
-            displayPeople(siblings)
         return siblings
         }
-    let spouse = console.log(findspouse())
-    let parents = console.log(findparents())
-    let siblings = console.log(findSibling())
+    displayPeople(findSpouse())
+    displayPeople(findparents())
+    displayPeople(findSibling())
 }
 
 function findPersonDescendants(person, people){
@@ -155,7 +166,7 @@ function findPersonDescendants(person, people){
         else{
             return false
     }})
-    console.log(descendants)
+    displayPeople(descendants)
     return descendants
 }
 
@@ -255,5 +266,29 @@ function chars(input) {
 }
 // End of chars()
 
+
+
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
+
+const searchByMultiple=(people)=>{
+    let searchResults = people
+
+    while(true){
+        //ask what trait
+        let userInput = prompt("Enter trait")
+        if(userInput === "gender"){
+            searchResults = searchByGender(searchResults)
+        }
+        if(userInput === "eye color"){
+            searchResults = searchByEyeColor(searchResults)
+        }
+    }
+}
+
+ const searchByGender=()=>{
+    //filteres genders and returns new array
+ }
+ const searchByEyeColor=()=>{
+
+ }
