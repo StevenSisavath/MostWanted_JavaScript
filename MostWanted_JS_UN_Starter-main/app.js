@@ -57,12 +57,6 @@ function searchByTraits(people){
     return foundPeople
 }
 
-
-
-
-
-
-
 /**
  * After finding a single person, we pass in the entire person-object that we found,
  * as well as the entire original dataset of people. We need people in order to find
@@ -123,6 +117,7 @@ function findPersonFamily(person, people){
             else{
                 return false;        
             }})
+            displayPeople(spouse)
         return spouse
         }
     function findparents(){
@@ -132,8 +127,8 @@ function findPersonFamily(person, people){
             }
             else{
                 return false
-            }   
-            })
+            }})
+            displayPeople(parents)
         return parents
         }
     function findSibling(){
@@ -144,12 +139,26 @@ function findPersonFamily(person, people){
             else{
                 return false;        
             }})
+            displayPeople(siblings)
         return siblings
         }
     let spouse = console.log(findspouse())
     let parents = console.log(findparents())
     let siblings = console.log(findSibling())
 }
+
+function findPersonDescendants(person, people){
+    let descendants = people.filter(function(el){
+        if (el.parents.includes(person.id)){
+            return true 
+        }
+        else{
+            return false
+    }})
+    console.log(descendants)
+    return descendants
+}
+
 /**
  * This function is used when searching the people collection by
  * a person-object's firstName and lastName properties.
