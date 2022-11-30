@@ -138,7 +138,7 @@ function findPersonFamily(person, people){
         }
     function findSibling(){
         let siblings = people.filter(function(el){
-            if (person.parents == el.parents){
+            if (person.parents.includes(el.parents[0||1]) && (el.firstName != person.firstName)){
                 return true
             }
             else{
