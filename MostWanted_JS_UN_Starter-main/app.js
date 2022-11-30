@@ -45,32 +45,22 @@ function app(people) {
 // End of app()
 
 function searchByTraits(people){
-    let trait = promptFor("Please type in search criteria with space then value? \nCriterias: \nid \nfirstName\nlastName\ngender\ndob\nheight\nweight\neyeColor\noccupation\nparents\ncurrentSpouse", chars);
-    let char = ';'
-    let numberOfCriterias = countString(trait, char)
-    let myArray = trait.split(';',numberOfCriterias + 1)
-    let foundPeople = people.filter(function(person){
-        if (('id ' + person.id === trait) || ('firstName ' + person.firstName === trait) || ('lastName ' + person.lastName === trait) || ('gender ' + person.gender === trait) || ('dob ' + person.dob === trait) || ('height ' + person.height === trait) || ('weight ' + person.weight === trait) || ('eyeColor ' + person.eyeColor === trait) || ('occupation ' + person.occupation === trait) || ('parents ' + person.parents === trait) || ('currentSpouse ' + person.currentSpouse === trait)){
-            return true;
-        }})  
-
-    displayPeople(foundPeople)
-    return searchByTraits(foundPeople)
-}
-function countString(str, letter) {
-    let count = 0;
-
-    // looping through the items
-    for (let i = 0; i < str.length; i++) {
-
-        // check if the character is at that position
-        if (str.charAt(i) == letter) {
-            count += 1;
-        }
+    
+    var trait = promptFor("Please type in search criteria with space then value? \nCriterias: \nid \nfirstName\nlastName\ngender\ndob\nheight\nweight\neyeColor\noccupation\nparents\ncurrentSpouse", chars);
+    let userTrait = trait.split(' ')
+    console.log(JSON.stringify(people))
+    if (JSON.stringify(people).includes(userTrait[0])){
+        let foundPeople = people.filter(function(person){
+            if (('id ' + person.id === trait) || ('firstName ' + person.firstName === trait) || ('lastName ' + person.lastName === trait) || ('gender ' + person.gender === trait) || ('dob ' + person.dob === trait) || ('height ' + person.height === trait) || ('weight ' + person.weight === trait) || ('eyeColor ' + person.eyeColor === trait) || ('occupation ' + person.occupation === trait) || ('parents ' + person.parents === trait) || ('currentSpouse ' + person.currentSpouse === trait)){
+                return true;
+            }}) 
+        displayPeople(foundPeople)
+        return searchByTraits(foundPeople)
+    }else{
+        console.log("Invalid")
+        return searchByTraits(people)
     }
-    return count;
 }
-
 
 /**
  * After finding a single person, we pass in the entire person-object that we found,
