@@ -48,16 +48,15 @@ function searchByTraits(people){
     
     var trait = promptFor("Please type in search criteria with space then value? \nCriterias: \nid \nfirstName\nlastName\ngender\ndob\nheight\nweight\neyeColor\noccupation\nparents\ncurrentSpouse", chars);
     let userTrait = trait.split(' ')
-    console.log(JSON.stringify(people))
     if (JSON.stringify(people).includes(userTrait[0])){
         let foundPeople = people.filter(function(person){
             if (('id ' + person.id === trait) || ('firstName ' + person.firstName === trait) || ('lastName ' + person.lastName === trait) || ('gender ' + person.gender === trait) || ('dob ' + person.dob === trait) || ('height ' + person.height === trait) || ('weight ' + person.weight === trait) || ('eyeColor ' + person.eyeColor === trait) || ('occupation ' + person.occupation === trait) || ('parents ' + person.parents === trait) || ('currentSpouse ' + person.currentSpouse === trait)){
                 return true;
             }}) 
-        displayPeople(foundPeople)
+        displayPeople(foundPeople, `Found Matches for ${trait}`)
         return searchByTraits(foundPeople)
     }else{
-        console.log("Invalid")
+        alert("Please Try Again")
         return searchByTraits(people)
     }
 }
@@ -86,7 +85,6 @@ function mainMenu(person, people) {
             //! TODO #1: Utilize the displayPerson function //////////////////////////////////////////
             // HINT: Look for a person-object stringifier utility function to help
             let personInfo = displayPerson(person[0]);
-            alert(personInfo);
             break;
         case "family":
             //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
@@ -143,9 +141,9 @@ function findPersonFamily(person, people){
             }})
         return siblings
         }
-    displayPeople(findSpouse())
-    displayPeople(findparents())
-    displayPeople(findSibling())
+    displayPeople(findSpouse(), 'Spouse:')
+    displayPeople(findparents(), 'Parents:')
+    displayPeople(findSibling(), 'Siblings:')
 }
 
 function findPersonDescendants(person, people){
@@ -156,7 +154,7 @@ function findPersonDescendants(person, people){
         else{
             return false
     }})
-    displayPeople(descendants)
+    displayPeople(descendants, 'Descendants:')
     return descendants
 }
 
@@ -186,14 +184,12 @@ function searchByName(people) {
  * to the user in the form of an alert().
  * @param {Array} people        A collection of person objects.
  */
-function displayPeople(people) {
+function displayPeople(people, description) {
     
-    alert(
-        people
-            .map(function (person) {
-                return `${person.firstName} ${person.lastName}` ;
-            })
-            .join("\n")
+    alert((description) + '\n' + (people.map(function (person) {
+        return `${person.firstName} ${person.lastName}` ;
+        })
+    .join("\n"))
     );
 }
 // End of displayPeople()
